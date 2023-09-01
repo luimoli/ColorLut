@@ -23,10 +23,17 @@ import numpy as np
 
 def cubeIndex(r, g, b, lut_size):
     # return int(r + g * 32 + b * 32 * 32)
-    return int(r*lut_size*lut_size + g*lut_size + b)
+    # return int(r*lut_size*lut_size + g*lut_size + b)
+    # return (r*lut_size*lut_size + g*lut_size + b).astype(int)
+
+    index = (r*lut_size*lut_size + g*lut_size + b).astype(int)
+    # index[index >= lut_size*lut_size*lut_size] = lut_size*lut_size*lut_size-1
+    if index >= lut_size*lut_size*lut_size:
+        index = lut_size*lut_size*lut_size-1
+    return index
 
 
-def trilinear_interpolation(lut_table_path, input_rgb):
+def trilinear_interpolation(lut, input_rgb):
     """_summary_
     Args:
         lut_table_path (_type_): _description_
@@ -36,7 +43,9 @@ def trilinear_interpolation(lut_table_path, input_rgb):
     """
     assert np.all(input_rgb <= 1)
 
-    lut = np.loadtxt(lut_table_path, delimiter='\t')
+    # lut = np.loadtxt(lut_table_path, delimiter='\t')
+
+
 
     # # Normalize input RGB values to range [0, 1]
     # rgb_normalized = input_rgb / 255.0
@@ -97,21 +106,23 @@ def trilinear_interpolation(lut_table_path, input_rgb):
 
 
 if __name__ =='__main__':
-    save_pathgt_path = 'data_17.txt'
-    # data = np.loadtxt(save_pathgt_path, delimiter='\t')
+    # save_pathgt_path = './lut_input/data_17.txt'
+    save_pathgt_path = './lut/lut_9.txt'
+    data = np.loadtxt(save_pathgt_path, delimiter='\t')
     
     # color = np.array([175, 32, 96])
     # # color = np.round(color / 255. * 16.)
     # color = color / 255. * 16.
     # index = color[0]*17*17 + color[1]*17 + color[2]
 
-    color = np.array([0.562500,	0.375000, 0.375000])*16
-    index = color[0]*17*17 + color[1]*17 + color[2]
+
+    # color = np.array([0.562500,	0.375000, 0.375000])*16
+    # index = color[0]*17*17 + color[1]*17 + color[2]
 
 
 
     # rgb = np.array([16, 239, 128]) / 255.
-    rgb = np.array([120, 200, 50]) / 255.
-    interpolated_rgb = trilinear_interpolation(save_pathgt_path, rgb)
+    rgb = np.array([0, 159, 64]) / 255.
+    interpolated_rgb = trilinear_interpolation(data, rgb)
     print(interpolated_rgb * 255)
 

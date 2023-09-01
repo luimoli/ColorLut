@@ -84,14 +84,14 @@ def generate_color_list(save_pathgt_path, size=17, flag='B',):
 
 
 if __name__ =='__main__':
-    save_pathgt_path = 'data_17.txt' #TODO
-    color_arr = generate_color_list(save_pathgt_path, size=17)  # specify lut cube size
+    save_pathgt_path = './lut_input/data_9.txt' #TODO
+    color_arr = generate_color_list(save_pathgt_path, size=9)  # specify lut cube size
     # data = np.loadtxt(save_pathgt_path, delimiter='\t')
 
     h, w = 1440, 2560  # screen's resolution
-    rows, cols = 4, 8  # generate patches
+    rows, cols = 6, 8  # generate patches
     num_fig = len(color_arr) // (rows*cols) # num of figures that color patches can fill
-    save_path = Path('./data_17/')   #TODO
+    save_path = Path('./data_9/')   #TODO
     os.makedirs(save_path, exist_ok=True)
     for i in range(num_fig+1):
         if i >= num_fig:
