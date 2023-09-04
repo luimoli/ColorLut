@@ -55,8 +55,8 @@ def generate_image_single(h, w, rows, cols, color_list, save_path):
 #     return color_arr
     
 
-def generate_color_list(save_pathgt_path, size=17, flag='B',):
-    """_summary_
+def generate_color_list(save_pathgt_path, size=17, flag='B'):
+    """generate color patches as a list, which's length = size^3.
 
     Args:
         size (int, optional): patch sequences size. Corresponding with 3d lut size. Defaults to 17.
@@ -91,7 +91,7 @@ if __name__ =='__main__':
     h, w = 1440, 2560  # screen's resolution
     rows, cols = 6, 8  # generate patches
     num_fig = len(color_arr) // (rows*cols) # num of figures that color patches can fill
-    save_path = Path('./data_9/')   #TODO
+    save_path = Path('./patch/data_9/')   #TODO
     os.makedirs(save_path, exist_ok=True)
     for i in range(num_fig+1):
         if i >= num_fig:

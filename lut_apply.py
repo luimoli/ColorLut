@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 
 # from lut_3linear_interpolation import trilinear_interpolation
-from lut_3linear_interpolation_arr import trilinear_interpolation
+from interpolation.lut_3linear_interpolation_arr import trilinear_interpolation
 from tqdm import tqdm
 
 
