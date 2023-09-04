@@ -12,7 +12,8 @@ from tqdm import tqdm
 
 if __name__ =='__main__':
     # img_path = Path('./test/kit-suman-5mcnzeSHFvE-unsplash.jpg')
-    img_path = Path('./data_9/0.png')
+    img_path = Path('./test/marvin-kuhn-uHrRgJKPPAk-unsplash.jpg')
+    # img_path = Path('./data_9/0.png')
 
     img = cv2.imread(str(img_path))
     # img = cv2.resize(img, None, fx=0.25, fy=0.25)
