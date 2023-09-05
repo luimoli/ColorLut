@@ -7,12 +7,13 @@ import numpy as np
 
 # from lut_3linear_interpolation import trilinear_interpolation
 from interpolation.lut_3linear_interpolation_arr import trilinear_interpolation
+from interpolation.lut_nearest_interpolation_arr import nearest_interpolation
 from tqdm import tqdm
 
 
 if __name__ =='__main__':
     # img_path = Path('./test/kit-suman-5mcnzeSHFvE-unsplash.jpg')
-    img_path = Path('./test/marvin-kuhn-uHrRgJKPPAk-unsplash.jpg')
+    img_path = Path('./image/marvin-kuhn-uHrRgJKPPAk-unsplash.jpg')
     # img_path = Path('./data_9/0.png')
 
     img = cv2.imread(str(img_path))
@@ -30,7 +31,9 @@ if __name__ =='__main__':
     #         res[i][j] = interpolated_rgb
     
     res = trilinear_interpolation(lut, img) * 255.
+    res = nearest_interpolation(lut, img) * 255.
+
 
     res = res[:, :, ::-1].copy()
-    cv2.imwrite(str(img_path.parent / f'{img_path.stem}_new{img_path.suffix}'), res)
+    cv2.imwrite(str(img_path.parent.parent / 'test' / f'{img_path.stem}_nearest{img_path.suffix}'), res)
     

@@ -19,7 +19,7 @@ def cubeIndex(r, g, b, lut_size):
     return index
 
 
-def trilinear_interpolation(lut, input_rgb):
+def nearest_interpolation(lut, input_rgb):
     """_summary_
     Args:
         lut_table_path (_type_): _description_
@@ -72,7 +72,7 @@ if __name__ =='__main__':
 
 
     # rgb = np.array([16, 239, 128]) / 255.
-    rgb = np.array([255, 255, 255]) / 255.
-    interpolated_rgb = trilinear_interpolation(data, rgb)
-    print(interpolated_rgb * 255)
+    # rgb = np.array([255, 255, 255]) / 255.
+    # interpolated_rgb = trilinear_interpolation(data, rgb)
+    # print(interpolated_rgb * 255)
 
