@@ -13,27 +13,22 @@ from tqdm import tqdm
 
 if __name__ =='__main__':
     # img_path = Path('./test/kit-suman-5mcnzeSHFvE-unsplash.jpg')
-    img_path = Path('./image/marvin-kuhn-uHrRgJKPPAk-unsplash.jpg')
+    # img_path = Path('./image/marvin-kuhn-uHrRgJKPPAk-unsplash.jpg')
     # img_path = Path('./data_9/0.png')
-
-    img = cv2.imread(str(img_path))
-    # img = cv2.resize(img, None, fx=0.25, fy=0.25)
-    img = img[:, :, ::-1].copy() / 255.
 
     lut_table_path = 'lut\lut_9.txt'
     lut = np.loadtxt(lut_table_path, delimiter='\t')
 
-    # res = np.zeros_like(img)
-    # h, w, c = img.shape
-    # for i in tqdm(range(h)):
-    #     for j in range(w):
-    #         interpolated_rgb = trilinear_interpolation(lut, img[i][j])
-    #         res[i][j] = interpolated_rgb
-    
-    res = trilinear_interpolation(lut, img) * 255.
-    res = nearest_interpolation(lut, img) * 255.
+    image_root = Path('./image')
+    img_path_list = [f for f in image_root.iterdir() if f.is_file()]
+    for img_path in img_path_list:
+        img = cv2.imread(str(img_path))
+        # img = cv2.resize(img, None, fx=0.25, fy=0.25)
+        img = img[:, :, ::-1].copy() / 255.
 
+        # res = trilinear_interpolation(lut, img) * 255.
+        res = nearest_interpolation(lut, img)
 
-    res = res[:, :, ::-1].copy()
-    cv2.imwrite(str(img_path.parent.parent / 'test' / f'{img_path.stem}_nearest{img_path.suffix}'), res)
+        res = res[:, :, ::-1].copy() * 255.
+        cv2.imwrite(str(img_path.parent.parent / 'test' / f'{img_path.stem}_nearest{img_path.suffix}'), res)
     
