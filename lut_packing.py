@@ -32,16 +32,17 @@ def get_point_index(upper_left, bottom_right, rows, cols):
     return point_list
 
 def get_point_index_gradient(upper_left, upper_right, bottom_left, rows, cols):
-    """for a single img, get color patches's indexes.
+    """for a single img, get color patches's indexes in this img.
 
     Args:
-        upper_left (_type_): _description_
-        bottom_right (_type_): _description_
-        rows (_type_): _description_
-        cols (_type_): _description_
+        upper_left (tuple): (h, w)
+        upper_right (tuple): (h, w)
+        bottom_left (tuple): (h, w)
+        rows (int): number of rows
+        cols (int): number of cols
 
     Returns:
-        _type_: _description_
+        list: list contains indexs with tuple format.
     """
     y1, x1 = upper_left
     y2, x2 = upper_right
@@ -94,6 +95,18 @@ def check_slice_img(img, point_list, square_size):
 
 
 def get_color(img_root, point_list, cut_range, original_length):
+    """get color patches' value from photos shot by lut index.
+       and return lut(cube index).
+
+    Args:
+        img_root (str): photos' root.
+        point_list (list): patch's center point index of each img (assume they are the same)
+        cut_range (float): get a square and calculate mean value.
+        original_length (int): the original length of lut, photos may contain more patches than original_length.
+
+    Returns:
+        _type_: _description_
+    """
     img_root = Path(img_root)
     img_path_list = [f for f in img_root.iterdir() if f.is_file()]
     img_path_list = sorted(img_path_list)
